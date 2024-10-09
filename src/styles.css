@@ -1,0 +1,69 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+   background-image: url(./img/Bg.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.main-title {
+  text-align: center;
+  color: #f4f4f4;
+  margin: 20px 0;
+  font-size: 2em;
+}
+
+.drag-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.drag-list {
+  list-style-type: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.drag-column {
+  width: 30%;
+  background-color: rgba(255, 255, 255, 0.8); 
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  text-align: center;
+  font-size: 1.5em;
+  color: #444;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background-color: #f4f4f4;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.team-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+p {
+  font-size: 1.1em;
+  color: #333;
+}
