@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 #📄 Kanban - Santander Coders 2024
+=======
+
 
 xxxxxxxx da Atividade Final do Módulo 4 do **Santander Coders 2024**.
 
@@ -6,7 +9,12 @@ xxxxxxxx da Atividade Final do Módulo 4 do **Santander Coders 2024**.
 Este trabaho faz parte do Módulo 4 do programa Santander Coders 2024, com os seguintes requisitos principais:
 
 
+<<<<<<< HEAD
 ##🛠️ Instruções de execução:
+=======
+
+## 📋 Desafio Explicado:
+>>>>>>> df293112d13b0c7d89cbc14c7ad93827a0f38d9d
 
 
 ## 🎯 Objetivos do Projeto
@@ -45,4 +53,8 @@ Orientado pelo professor **[Palmer Oliveira] (hhttps://github.com/expalmer)** co
 
 
 
+<<<<<<< HEAD
 Esse é o arquivo `README.md` completo para o projeto Front End Dinâmico (JS Dom) Ele segue boas práticas, fornece detalhes claros sobre o desafio, objetivos, tecnologias utilizadas, estrutura do projeto e instruções de execução.
+=======
+Esse é o arquivo `README.md` completo para o projeto Front End Dinâmico (JS Dom) Ele segue boas práticas, fornece detalhes claros sobre o desafio, objetivos, tecnologias utilizadas, estrutura do projeto e instruções de execução.
+>>>>>>> df293112d13b0c7d89cbc14c7ad93827a0f38d9d
