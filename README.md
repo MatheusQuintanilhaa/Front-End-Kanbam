@@ -1,6 +1,5 @@
-<<<<<<< HEAD
+
 #📄 Kanban - Santander Coders 2024
-=======
 
 
 xxxxxxxx da Atividade Final do Módulo 4 do **Santander Coders 2024**.
@@ -8,19 +7,18 @@ xxxxxxxx da Atividade Final do Módulo 4 do **Santander Coders 2024**.
 ## 📆 Comando da Atividade Final - Módulo 4
 Este trabaho faz parte do Módulo 4 do programa Santander Coders 2024, com os seguintes requisitos principais:
 
-
-<<<<<<< HEAD
 ##🛠️ Instruções de execução:
-=======
+
 
 ## 📋 Desafio Explicado:
->>>>>>> df293112d13b0c7d89cbc14c7ad93827a0f38d9d
+
 
 
 ## 🎯 Objetivos do Projeto
 
 
-## 💻 Tecnologias Utilizadas
+## 💻 Tecnologias Utilizadas:
+
 - **HTML5**: Estruturação das páginas e componentes.
 - **CSS3**: Estilização da interface do usuário.
 - **JavaScript**: Manipulação básica do DOM.
