@@ -1,4 +1,4 @@
-# To do List - Santander Coders 2024
+#📄 Kanban - Santander Coders 2024
 
 xxxxxxxx da Atividade Final do Módulo 4 do **Santander Coders 2024**.
 
@@ -6,8 +6,7 @@ xxxxxxxx da Atividade Final do Módulo 4 do **Santander Coders 2024**.
 Este trabaho faz parte do Módulo 4 do programa Santander Coders 2024, com os seguintes requisitos principais:
 
 
-
-## 📋 Desafio Explicado:
+##🛠️ Instruções de execução:
 
 
 ## 🎯 Objetivos do Projeto
