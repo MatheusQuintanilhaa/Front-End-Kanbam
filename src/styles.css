@@ -6,7 +6,7 @@
 
 body {
   font-family:Verdana, Geneva, Tahoma, sans-serif;
-   background-image: url(./img/Bg.jpg);
+   /* background-image: url(./img/Bg.jpg); */
   background-size: cover;
   background-position: center;
 }
@@ -16,6 +16,29 @@ body {
   color: #f4f4f4;
   margin: 20px 0;
   font-size: 2em;
+  font-weight: 600;
+}
+
+.images {
+  width: 50px;
+  display: flex;
+  gap: 15px;
+  margin-left: 20px;
+}
+
+.image1 {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.listasTasks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+li {
+  list-style: none;
 }
 
 .drag-container {
@@ -39,7 +62,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header h1 {
+h1 {
   text-align: center;
   font-size: 1.5em;
   color: #444;
