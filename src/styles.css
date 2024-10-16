@@ -6,39 +6,42 @@
 
 body {
   font-family:Verdana, Geneva, Tahoma, sans-serif;
-   /* background-image: url(./img/Bg.jpg); */
+   background-image: url(./img/Bg.jpg); 
   background-size: cover;
   background-position: center;
 }
 
-.main-title {
+.title {
   text-align: center;
-  color: #f4f4f4;
+  color: #e5f506;
   margin: 20px 0;
   font-size: 2em;
   font-weight: 600;
 }
 
-.images {
-  width: 50px;
-  display: flex;
-  gap: 15px;
-  margin-left: 20px;
-}
 
-.image1 {
-  height: 50px;
-  border-radius: 50%;
-}
-
-.listasTasks {
+.listTasks {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 20px;
 }
 
-li {
+
+.filter-tag ul {
+  display: flex;
+  gap: 10px;
   list-style: none;
+  padding: 0;
+}
+
+.filter-tag li {
+  cursor: pointer;
+  background-color: #ececec;
+  padding: 5px 10px;
+  border-radius: 5px;
+  list-style: none;
+  
 }
 
 .drag-container {
@@ -61,11 +64,40 @@ li {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.filter-tag ul {
+  border: none;
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
 
-h1 {
+.filter-tag li {
+  cursor: pointer;
+  background-color:rgba(255, 255, 255, 0.8);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #000;
+}
+
+.drag-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.drag-column {
+  width: 30%;
+  background-color: rgba(255, 255, 255, 0.7); /*define a transparência*/
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
   text-align: center;
   font-size: 1.5em;
-  color: #444;
+  color: #000;
 }
 
 .task {
@@ -80,13 +112,32 @@ h1 {
 }
 
 .team-photo {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 10p
 }
 
+.filter{
+  display: flex;
+  border: solid 1px #f4f4f4;
+    display: flex;
+    gap: 8px;
+    
+}
 p {
   font-size: 1.1em;
   color: #333;
 }
+
+.green{
+  color: green;
+
+}
+.blue{
+  color:blue;
+}
+.orange{
+  color: orange;
+}
+
