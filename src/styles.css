@@ -87,6 +87,15 @@ body {
   margin-top: 20px;
 }
 
+.dragging {
+  opacity: 0.8;
+}
+
+.cards-hover {
+  background-color: #eaeffa;
+  border-radius: 8px;
+}
+
 .drag-column {
   width: 30%;
   background-color: rgba(255, 255, 255, 0.7); /*define a transparência*/
