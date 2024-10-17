@@ -1,87 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanban</title>
     <link rel="stylesheet" href="./styles.css" />
-</head>
+  </head>
 
-<body>
-  <h1 class="title">Kanban para DevOps</h1>
-  <hr>
+  <body>
+    <h1 class="title">Kanban para DevOps</h1>
+    <hr />
 
-
-   <header>
+    <header>
       <div class="listasTasks">
-
-          <div class="images" id="user-list">
-
-          <img src="https://media.licdn.com/dms/image/v2/C4E03AQF3NhnpbAZsNg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1649976244866?e=1733961600&v=beta&t=bnUqRki445V3N9VSWUufpjUdVIr4JNb33vCVO7f3Uyg" alt="Usuário 1" class="team-photo" id="usuario1">
-
-          <img src="https://media.licdn.com/dms/image/v2/D4D03AQHmPLlXI23dfQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1720533826099?e=1733961600&v=beta&t=gJ-9xjRXmBDT4hE1lDe0Fm5MxYB7z-VlHW0_DOKDlgc" alt="Usuário 2" class="team-photo" id="usuario2">
-          <img src="https://media.licdn.com/dms/image/v2/D4D03AQFZLeulbw8dDA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718671055862?e=1733961600&v=beta&t=2fXuhxVTNnzdN4KsJuhDt8eY0XQYR6YGIi0dNW5RRJ0" alt="Usuário 3" alt="Usuário 3" class="team-photo" id="usuario3">
-                  
-          <img src="https://media.licdn.com/dms/image/v2/D4D03AQEQasNxVFAO7Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719453932196?e=1733961600&v=beta&t=G3zJh-sZm3ou0sU-jqv86fxTjBWZIU-WPli1eHyTAuM" alt="Usuário 4" class="team-photo" id="usuario4">
+        <div class="images" id="user-list">
+          <!-- As imagens serão inseridas dinamicamente aqui pelo JavaScript -->
         </div>
-        
-      <div class="listTasks">
-      
-          <div class="images" id="user-list"></div>
-      
-          <div class="filter-tag">
-              <ul class="filter" id="tag-filter">
-                  <li data-tag="frontend">Front-End</li>
-                  <li data-tag="backend">Back-End</li>
-                  <li data-tag="ux">UX</li>
-              </ul>
-          </div>
+
+        <div class="filter-tag">
+          <ul class="filter" id="tag-filter">
+            <li data-tag="frontend">Front-End</li>
+            <li data-tag="backend">Back-End</li>
+            <li data-tag="ux">UX</li>
+          </ul>
+        </div>
       </div>
-  </header>
+    </header>
 
-  <main>
-        <div class="drag-container">
-           
-            <ul class="drag-list">
-                <li class="drag-column to-do-column">
-                    <span class="header">
-                        <h2 class="green">To Do</h2>
-                    </span>
-                    <div class="task">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFZLeulbw8dDA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718671055862?e=1733961600&v=beta&t=2fXuhxVTNnzdN4KsJuhDt8eY0XQYR6YGIi0dNW5RRJ0" alt="Marcely" class="team-photo">
-                        <p>Tarefa 1</p>
-                    </div>
-                    <div class="task">
-                        <img src="https://media.licdn.com/dms/image/v2/C4E03AQF3NhnpbAZsNg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1649976244866?e=1733961600&v=beta&t=bnUqRki445V3N9VSWUufpjUdVIr4JNb33vCVO7f3Uyg" alt="Cezar" class="team-photo">
-                        <p>Tarefa 2</p>
-                    </div>
-                </li>
+    <main>
+      <div class="drag-container">
+        <ul class="drag-list">
+          <!-- Coluna To Do -->
+          <li class="drag-column to-do-column">
+            <span class="header">
+              <h2 class="green">To Do (<span id="to-do-count">0</span>)</h2>
+            </span>
+            <div class="task">
+              <img
+                src="https://media.licdn.com/dms/image/v2/D4D03AQFZLeulbw8dDA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718671055862?e=1733961600&v=beta&t=2fXuhxVTNnzdN4KsJuhDt8eY0XQYR6YGIi0dNW5RRJ0"
+                alt="Marcely"
+                class="team-photo"
+              />
+              <p>Tarefa 1</p>
+            </div>
+            <div class="task">
+              <img
+                src="https://media.licdn.com/dms/image/v2/C4E03AQF3NhnpbAZsNg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1649976244866?e=1733961600&v=beta&t=bnUqRki445V3N9VSWUufpjUdVIr4JNb33vCVO7f3Uyg"
+                alt="Cezar"
+                class="team-photo"
+              />
+              <p>Tarefa 2</p>
+            </div>
+          </li>
 
-            
-                <li class="drag-column in-progress-column">
-                    <span class="header">
-                        <h2 class="blue">In Progress</h2>
-                    </span>
-                    <div class="task">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQEQasNxVFAO7Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719453932196?e=1733961600&v=beta&t=G3zJh-sZm3ou0sU-jqv86fxTjBWZIU-WPli1eHyTAuM" alt="Matheus" class="team-photo">
-                        <p>Tarefa 3</p>
-                    </div>
-                </li>
+          <!-- Coluna In Progress -->
+          <li class="drag-column in-progress-column">
+            <span class="header">
+              <h2 class="blue">
+                In Progress (<span id="in-progress-count">0</span>)
+              </h2>
+            </span>
+            <div class="task">
+              <img
+                src="https://media.licdn.com/dms/image/v2/D4D03AQEQasNxVFAO7Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719453932196?e=1733961600&v=beta&t=G3zJh-sZm3ou0sU-jqv86fxTjBWZIU-WPli1eHyTAuM"
+                alt="Matheus"
+                class="team-photo"
+              />
+              <p>Tarefa 3</p>
+            </div>
+          </li>
 
-            
-                <li class="drag-column done-column">
-                    <span class="header">
-                        <h2 class="orange">Done</h2>
-                    </span>
-                    <div class="task">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHmPLlXI23dfQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1720533826099?e=1733961600&v=beta&t=gJ-9xjRXmBDT4hE1lDe0Fm5MxYB7z-VlHW0_DOKDlgc" alt="Karol" class="team-photo">
-                        <p>Tarefa 4</p>
-                        
-                </li>
-            </ul>
-        </div>
-    </div>
-</main>
-	<script src="script.js"></script>
-</body>
+          <!-- Coluna Done -->
+          <li class="drag-column done-column">
+            <span class="header">
+              <h2 class="orange">Done (<span id="done-count">0</span>)</h2>
+            </span>
+            <div class="task">
+              <img
+                src="https://media.licdn.com/dms/image/v2/D4D03AQHmPLlXI23dfQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1720533826099?e=1733961600&v=beta&t=gJ-9xjRXmBDT4hE1lDe0Fm5MxYB7z-VlHW0_DOKDlgc"
+                alt="Karol"
+                class="team-photo"
+              />
+              <p>Tarefa 4</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
 </html>
