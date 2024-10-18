@@ -1,13 +1,3 @@
-// Armazenar os dados no localStorage
-function salvarDados(dados, chave) {
-  localStorage.setItem(chave, JSON.stringify(dados));
-}
-
-// Carregar os dados do localStorage
-function carregarDados(chave) {
-  return JSON.parse(localStorage.getItem(chave)) || [];
-}
-
 // Função para atualizar a contagem de cards em cada coluna
 function atualizarContagem() {
   const toDoCount = document.querySelectorAll(".to-do-column .task").length;
@@ -21,33 +11,72 @@ function atualizarContagem() {
   document.getElementById("done-count").textContent = doneCount;
 }
 
-// Função para carregar as imagens dos usuários a partir da API
+// Função assíncrona para carregar os usuários da API e exibi-los
 async function carregarUsuarios() {
   try {
     const response = await fetch(
-      "https://gist.githubusercontent.com/MatheusQuintanilhaa/d008a9b0ce7f621ac9cfffca90900c43/raw/c752bd091a450da6f8b780934eefa05a8dcfa759/users"
+      "https://gist.githubusercontent.com/MatheusQuintanilhaa/d008a9b0ce7f621ac9cfffca90900c43/raw/4f9850b5ad9917a48e3cc0939cd168c25bd4fcb1/users"
     );
+
+    // Verifique se a resposta é válida
+    if (!response.ok) {
+      throw new Error("Erro na rede: " + response.status);
+    }
+
     const usuarios = await response.json();
-
     const userList = document.getElementById("user-list");
-    userList.innerHTML = ""; // Limpar as imagens estáticas
 
-    // Adicionar cada imagem do usuário ao HTML
-    usuarios.forEach((usuario, index) => {
+    // Limpa a lista de usuários antes de adicionar novos
+    userList.innerHTML = "";
+
+    // Adiciona os usuários à lista
+    usuarios.forEach((usuario) => {
       const img = document.createElement("img");
-      img.src = usuario.foto; // Link da foto do usuário da API
-      img.alt = `Usuário ${usuario.nome}`;
+      img.src = usuario.foto;
+      img.alt = usuario.nome;
       img.classList.add("team-photo");
-      img.id = `usuario${index + 1}`;
-      userList.appendChild(img);
+      img.id = `usuario${usuario.id}`;
+
+      const nome = document.createElement("p");
+      nome.textContent = usuario.nome;
+
+      const userContainer = document.createElement("div");
+      userContainer.appendChild(img);
+      userContainer.appendChild(nome);
+
+      userList.appendChild(userContainer);
+
+      // Adiciona evento de clique
+      img.addEventListener("click", () => {
+        document.querySelectorAll(".team-photo").forEach((photo) => {
+          photo.classList.remove("selected");
+        });
+
+        img.classList.add("selected");
+        document.getElementById(
+          "selected-user-name"
+        ).textContent = `Usuário Selecionado: ${usuario.nome}`;
+      });
     });
+
+    // Seleciona o primeiro usuário inicialmente
+    if (usuarios.length > 0) {
+      const firstUser = usuarios[0];
+      document.getElementById(
+        "selected-user-name"
+      ).textContent = `Usuário Selecionado: ${firstUser.nome}`;
+      const firstImage = document.querySelector(`img[src="${firstUser.foto}"]`);
+      if (firstImage) {
+        firstImage.classList.add("selected");
+      }
+    }
   } catch (error) {
     console.error("Erro ao carregar usuários:", error);
   }
 }
 
-// Chamar a função ao carregar a página
+// Carrega os usuários da API ao carregar a página
 window.onload = () => {
-  atualizarContagem(); // Atualizar contagem de cards
-  carregarUsuarios(); // Carregar usuários da API e atualizar as imagens
+  carregarUsuarios();
+  atualizarContagem();
 };

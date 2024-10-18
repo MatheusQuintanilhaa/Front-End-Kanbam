@@ -135,3 +135,14 @@ p {
 .orange {
   color: orange;
 }
+
+.selected-user {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.selected-user p {
+  color: #fff;
+}
