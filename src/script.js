@@ -27,7 +27,7 @@ document.querySelectorAll('drag-column').forEach(column => {
     e.currentTarget.classList.add('cards-hover');
   })
 
-
+// teste
 column.addEventListener('dragleave', e => {
   e.currentTarget.classList.remove('cards-hover');
 })
