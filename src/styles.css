@@ -13,7 +13,7 @@ body {
 
 .title {
   text-align: center;
-  color: #e5f506;
+  color: #333;
   margin: 20px 0;
   font-size: 2em;
   font-weight: 600;
@@ -83,18 +83,65 @@ body {
   margin-top: 20px;
 }
 
+.dragging {
+  opacity: 0.8;
+}
+
+.cards-hover {
+  background-color: #eaeffa;
+  border-radius: 8px;
+}
+
 .drag-column {
   width: 30%;
   background-color: rgba(255, 255, 255, 0.7); /*define a transparência*/
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.drag-column::after {
+  position: absolute;
+  content: "";
+  border-radius: 8px;
+  height: 5px;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.drag-column[data-id="1"]::after {
+  background-color: rgb(93, 184, 93);
+}
+
+.drag-column[data-id="2"]::after {
+  background-color: rgb(107, 123, 218);
+}
+
+.drag-column[data-id="3"]::after {
+  background-color: rgb(202, 155, 68);
+}
+
+.kanban-title {
+  display: flex;
+  justify-content: space-between;
 }
 
 h2 {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 18px;
   color: #000;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-card {
+  color: #4b5563;
+  font-size: 12px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
 }
 
 .task {
@@ -106,6 +153,7 @@ h2 {
   padding: 10px;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .team-photo {

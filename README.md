@@ -91,18 +91,17 @@ Este trabaho faz parte do Módulo 4 do programa Santander Coders 2024 e envolve 
 
 ## 🗂️ Estrutura do Projeto
 
-```bash
-📦 kanban-project
- ┣ 📂src
- ┃ ┣img
- ┃ ┗ 📜index.html
- ┃ ┗ 📜styles.css
- ┣ 📜README.md
- ┗ 📜.gitignore
+📦 kanban-project 
+┣ 📂src
+┃┣ img 
+┃┗📜 index.html 
+┃┗📜 styles.css 
+┣📜 README.md 
+┗📜.gitignore
 
+## 🚀 Projeto Finalizado
 
-
-## - 🚀 Projeto Finalizado
+xxxxxxxxx
 
 
 ## 👥 Equipe de Desenvolvimento
@@ -111,20 +110,18 @@ Este projeto foi desenvolvido por:
 - **[Cezanilton Silva](https://github.com/Cezaniltom/)**
 - **[Karolyne Carvalho](https://github.com/KarolyneC)**
 - **[Marcely Lobato](https://github.com/marcelylobato/)**
-- **[Matheus Quintanilha](github.com/MatheusQuintanilhaa)**
+- **[Matheus Quintanilha](https://github.com/MatheusQuintanilhaa)**
 
 
-Orientado pelo professor **[Palmer Oliveira] (hhttps://github.com/expalmer)** como parte do programa Santander Coders 2024.
+Orientado pelo professor **[Palmer Oliveira](https://github.com/expalmer)** como parte do programa Santander Coders 2024.
+
 
 
 ## 🔗 Links Úteis
-- [API de Armazenamento na Web](https://developer.mozilla.org/pt-BR/docs/Web/API/Web_Storage_API)
 
+- [API de Armazenamento na Web](https://developer.mozilla.org/pt-BR/docs/Web/API/Web_Storage_API)
 - [Manipulando o DOM](http://devfuria.com.br/javascript/dom-manipulando-o-dom/)
 
-
-
+---
 
 Esse README fornece uma descrição clara do projeto, suas funcionalidades e como ele pode ser executado, além de incluir os critérios de avaliação.
-
-
