@@ -5,9 +5,8 @@
 }
 
 body {
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  background-image: url(./img/background.jpg);
-   /* background-image: url(./img/Bg.jpg);  */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-image: url(./img/Bg.jpg);
   background-size: cover;
   background-position: center;
 }
@@ -20,14 +19,12 @@ body {
   font-weight: 600;
 }
 
-
 .listTasks {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
 }
-
 
 .filter-tag ul {
   display: flex;
@@ -42,7 +39,6 @@ body {
   padding: 5px 10px;
   border-radius: 5px;
   list-style: none;
-  
 }
 
 .drag-container {
@@ -60,7 +56,7 @@ body {
 
 .drag-column {
   width: 30%;
-  background-color: rgba(255, 255, 255, 0.8); 
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -75,7 +71,7 @@ body {
 
 .filter-tag li {
   cursor: pointer;
-  background-color:rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 5px 10px;
   border-radius: 5px;
   color: #000;
@@ -107,7 +103,7 @@ body {
 
 .drag-column::after {
   position: absolute;
-  content: '';
+  content: "";
   border-radius: 8px;
   height: 5px;
   width: 100%;
@@ -146,7 +142,6 @@ h2 {
   background-color: transparent;
   cursor: pointer;
   border: none;
-
 }
 
 .task {
@@ -165,29 +160,37 @@ h2 {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 10p
+  margin-right: 10p;
 }
 
-.filter{
+.filter {
   display: flex;
   border: solid 1px #f4f4f4;
-    display: flex;
-    gap: 8px;
-    
+  display: flex;
+  gap: 8px;
 }
 p {
   font-size: 1.1em;
   color: #333;
 }
 
-.green{
-  color: rgb(93, 184, 93);
+.green {
+  color: green;
+}
+.blue {
+  color: blue;
+}
+.orange {
+  color: orange;
+}
 
-}
-.blue{
-  color:rgb(107, 123, 218);
-}
-.orange{
-  color: rgb(202, 155, 68);
+.selected-user {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
+.selected-user p {
+  color: #fff;
+}
