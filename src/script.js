@@ -24,6 +24,28 @@
 //   });
 // });
 
+// Criação do card
+
+const createCard = ({ target }) => {
+  if (!target.classList.contains("column__cards")) return;
+
+  const card = document.createElement("section");
+
+  card.className = "card";
+  card.draggable = "true";
+  card.contentEditable = "true";
+
+  card.addEventListener("focusout", () => {
+      card.contentEditable = "false";
+      if (!card.textContent) card.remove();
+  });
+
+  card.addEventListener("dragstart", dragStart);
+
+  target.append(card);
+  card.focus();
+};
+
 // Função para atualizar a contagem de cards em cada coluna
 function atualizarContagem() {
   const toDoCount = document.querySelectorAll(".to-do-column .task").length;
