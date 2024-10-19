@@ -6,7 +6,7 @@
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-image: url(./img/Bg.jpg);
+  background-image: url(./img/background.jpg);
   background-size: cover;
   background-position: center;
 }
@@ -193,4 +193,47 @@ p {
 
 .selected-user p {
   color: #fff;
+}
+
+.selected {
+  position: relative;
+  -webkit-filter: grayscale(0.5) contrast(0.95) brightness(0.9);
+  filter: grayscale(0.5) contrast(0.95) brightness(0.9);
+}
+.selected::before {
+  background-color: radial-gradient(40%, circle, #d4a9af 55%, #000 150%);
+  mix-blend-mode: overlay;
+}
+.selected:before {
+  z-index: 2;
+}
+.selected:after,
+.selected:before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.selected::after {
+  background-color: #d8cdcb;
+  mix-blend-mode: color;
+}
+.selected:after {
+  z-index: 3;
+}
+.selected:after,
+.selected:before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
 }

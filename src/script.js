@@ -15,7 +15,6 @@ document.querySelectorAll("drag-column").forEach((column) => {
     e.currentTarget.classList.add("cards-hover");
   });
 
-  // teste
   column.addEventListener("dragleave", (e) => {
     e.currentTarget.classList.remove("cards-hover");
   });
@@ -24,6 +23,7 @@ document.querySelectorAll("drag-column").forEach((column) => {
     e.currentTarget.appendChild(dragCard);
   });
 });
+
 // Função para atualizar a contagem de cards em cada coluna
 function atualizarContagem() {
   const toDoCount = document.querySelectorAll(".to-do-column .task").length;
@@ -66,19 +66,28 @@ async function carregarUsuarios() {
       const nome = document.createElement("p");
       nome.textContent = usuario.nome;
 
+      const figure = document.createElement("figure");
+      figure.appendChild(img);
+
       const userContainer = document.createElement("div");
-      userContainer.appendChild(img);
+      userContainer.appendChild(figure);
       userContainer.appendChild(nome);
 
       userList.appendChild(userContainer);
 
       // Adiciona evento de clique
-      img.addEventListener("click", () => {
-        document.querySelectorAll(".team-photo").forEach((photo) => {
-          photo.classList.remove("selected");
+      img.addEventListener("click", (event) => {
+        const teamPhoto = document.querySelectorAll(".team-photo");
+
+        // Remove a classe "selected" de todos os usuários
+        teamPhoto.forEach((photo) => {
+          photo.parentNode.classList.remove("selected");
         });
 
-        img.classList.add("selected");
+        // Adiciona a classe "selected" ao contêiner do usuário clicado
+        event.target.parentNode.classList.add("selected");
+
+        // Atualiza o nome do usuário selecionado
         document.getElementById(
           "selected-user-name"
         ).textContent = `Usuário Selecionado: ${usuario.nome}`;
@@ -88,12 +97,16 @@ async function carregarUsuarios() {
     // Seleciona o primeiro usuário inicialmente
     if (usuarios.length > 0) {
       const firstUser = usuarios[0];
-      document.getElementById(
-        "selected-user-name"
-      ).textContent = `Usuário Selecionado: ${firstUser.nome}`;
       const firstImage = document.querySelector(`img[src="${firstUser.foto}"]`);
+
       if (firstImage) {
-        firstImage.classList.add("selected");
+        // Seleciona o contêiner do primeiro usuário
+        firstImage.parentNode.classList.add("selected");
+
+        // Atualiza o nome do usuário selecionado
+        document.getElementById(
+          "selected-user-name"
+        ).textContent = `Usuário Selecionado: ${firstUser.nome}`;
       }
     }
   } catch (error) {
@@ -106,5 +119,3 @@ window.onload = () => {
   carregarUsuarios();
   atualizarContagem();
 };
-
-//teste
