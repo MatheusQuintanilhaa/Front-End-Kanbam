@@ -24,39 +24,162 @@
 //   });
 // });
 
-// Criação do card
+class App {
+  constructor() {
+    this.$todo = document.querySelector('#todo ul');
+    this.$doing = document.querySelector('#doing ul');
+    this.$completed = document.querySelector('#completed ul');
+    this.cards = [];
+  }
 
-const createCard = ({ target }) => {
-  if (!target.classList.contains("column__cards")) return;
+}
 
-  const card = document.createElement("section");
+// Adiciona evento para o botão de nova tarefa
+const modaisAbrir = document.querySelectorAll('.add-card');
+const modal = document.getElementById('modal');
+const botaoFechar = document.querySelector('.close');
+const botaoSalvar = document.getElementById('salvarTarefa');
+const inputNomeTarefa = document.getElementById('nomeTarefa');
+let listaAtual;
 
-  card.className = "card";
-  card.draggable = "true";
-  card.contentEditable = "true";
 
-  card.addEventListener("focusout", () => {
-      card.contentEditable = "false";
-      if (!card.textContent) card.remove();
-  });
+function abrirModal(event) {
+  modal.style.display = 'flex';
+  inputNomeTarefa.value = '';
 
-  card.addEventListener("dragstart", dragStart);
+  const section = event.target.closest('section');
+  listaAtual = section.querySelector('ul');
+}
 
-  target.append(card);
-  card.focus();
-};
+function fecharModal() {
+  modal.style.display = 'none';
+}
+
+function salvarTarefa() {
+  const nomeTarefa = inputNomeTarefa.value.trim();
+
+  if (nomeTarefa && listaAtual) {
+    const novaTarefa = document.createElement('li');
+    novaTarefa.textContent = nomeTarefa;
+
+    listaAtual.appendChild(novaTarefa);
+
+    const contador = listaAtual.closest('section').querySelector('small');
+    contador.textContent = `total ${listaAtual.children.length}`;
+
+    fecharModal();
+  } else {
+    alert('Por favor, insira o nome da tarefa.');
+  }
+}
+
+modaisAbrir.forEach(botao => {
+  botao.addEventListener('click', abrirModal);
+});
+
+botaoFechar.addEventListener('click', fecharModal);
+
+botaoSalvar.addEventListener('click', salvarTarefa);
+
+window.addEventListener('click', function (event) {
+  if (event.target === modal) {
+    fecharModal();
+  }
+});
+
+onMove(event); {
+  const button = event.target.closest('button');
+  if (!button) {
+    return;
+  }
+
+  const id = +button.dataset.id;
+  const move = button.dataset.move;
+  const card = this.cards.find((card) => card.id === id);
+
+  switch (card.section) {
+    case 'todo':
+      card.section = 'doing';
+      break;
+    case 'doing':
+      if (move === 'left') {
+        card.section = 'todo';
+      } else {
+        card.section = 'completed';
+      }
+      break;
+    case 'completed':
+      card.section = 'doing';
+      break  
+  }
+this.render();
+}
+
+render(); {
+  const todoCards = this.cards.filter((card) => card.section === 'todo');
+  const doingCards = this.cards.filter((card) => card.section === 'doing');
+  const completedCards = this.cards.filter((card) => card.section === 'completed');
+
+  this.renderTotal(this.$todo.querySelector("small"), todoCards.length);
+  this.renderCards(this.$todo.querySelector("ul"), todoCards);
+
+  this.renderTotal(this.$doing.querySelector("small"), doingCards.length);
+  this.renderCards(this.$doing.querySelector("ul"), doingCards);
+
+  this.renderTotal(
+    this.$completed.querySelector("small"),
+    completedCards.length
+  );
+  this.renderCards(this.$completed.querySelector("ul"), completedCards);
+}
+
+renderTotal(dom, total); {
+  dom.textContent = `total ${total}`;
+}
+
+renderCards(dom, cards); {
+  const html = cards
+    .map((card) => {
+      return `
+    <li>
+      <span>${card.tag}</span>
+      <p>${card.description}</p>
+      <div>
+        ${
+          card.section === "todo"
+            ? ""
+            : `<button class="move" data-id="${card.id}" data-move="left">◀️</button>`
+        }  
+        ${
+          card.section === "completed"
+            ? ""
+            : `<button class="move" data-id="${card.id}" data-move="right">▶️</button>`
+        }  
+        
+      </div>
+      <span>${card.createdAt}</span>
+    </li>
+  `;
+    })
+    .join("");
+
+  dom.innerHTML = html;
+}
+
+const app = new App();
+
 
 // Função para atualizar a contagem de cards em cada coluna
 function atualizarContagem() {
   const toDoCount = document.querySelectorAll(".to-do-column .task").length;
-  const inProgressCount = document.querySelectorAll(
+  const doingCount = document.querySelectorAll(
     ".in-progress-column .task"
   ).length;
-  const doneCount = document.querySelectorAll(".done-column .task").length;
+  const completedCount = document.querySelectorAll(".completed-column .task").length;
 
   document.getElementById("to-do-count").textContent = toDoCount;
-  document.getElementById("in-progress-count").textContent = inProgressCount;
-  document.getElementById("done-count").textContent = doneCount;
+  document.getElementById("in-progress-count").textContent = doingCount;
+  document.getElementById("completed-count").textContent = completedCount;
 }
 
 // Função assíncrona para carregar os usuários da API e exibi-los
