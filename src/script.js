@@ -87,7 +87,7 @@ window.addEventListener('click', function (event) {
   }
 });
 
-onMove(event); {
+function onMove(event) {
   const button = event.target.closest('button');
   if (!button) {
     return;
@@ -115,7 +115,7 @@ onMove(event); {
 this.render();
 }
 
-render(); {
+function render() {
   const todoCards = this.cards.filter((card) => card.section === 'todo');
   const doingCards = this.cards.filter((card) => card.section === 'doing');
   const completedCards = this.cards.filter((card) => card.section === 'completed');
@@ -133,11 +133,11 @@ render(); {
   this.renderCards(this.$completed.querySelector("ul"), completedCards);
 }
 
-renderTotal(dom, total); {
+function renderTotal(dom, total) {
   dom.textContent = `total ${total}`;
 }
 
-renderCards(dom, cards); {
+function renderCards(dom, cards) {
   const html = cards
     .map((card) => {
       return `
