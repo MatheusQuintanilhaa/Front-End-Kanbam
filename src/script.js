@@ -65,7 +65,7 @@ function salvarTarefa() {
     listaAtual.appendChild(novaTarefa);
 
     const contador = listaAtual.closest('section').querySelector('small');
-    contador.textContent = `total ${listaAtual.children.length}`;
+    contador.textContent = `${listaAtual.children.length}`;
 
     fecharModal();
   } else {

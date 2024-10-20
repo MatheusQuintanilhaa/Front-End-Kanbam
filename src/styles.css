@@ -28,12 +28,18 @@ body {
 
 .filter-tag ul {
   display: flex;
+  justify-content: center;
+  flex-direction: row;
   gap: 10px;
   list-style: none;
-  padding: 0;
+  margin: 20px;
 }
 
 .filter-tag li {
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   background-color: #ececec;
   padding: 5px 10px;
@@ -81,6 +87,7 @@ body {
   margin: auto;
   max-width: 960px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   gap: 40px;
   padding: 40px;
@@ -196,6 +203,7 @@ h2 {
 }
 
 .team-photo {
+  display: flex;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -213,14 +221,14 @@ p {
   color: #333;
 }
 
-.green {
-  color: green;
+.red {
+  color: #990A0A;
 }
 .blue {
-  color: blue;
+  color: #0000FF;
 }
-.orange {
-  color: orange;
+.green {
+  color: #389e1e;
 }
 
 .selected-user {
@@ -231,7 +239,8 @@ p {
 }
 
 .selected-user p {
-  color: #fff;
+  margin-top: 50px;
+  color: #201f1f;
 }
 
 .selected {
@@ -305,3 +314,21 @@ p {
   font-size: 20px;
   cursor: pointer;
 }
+
+
+/* formatação das imagens utilizadas para o selected */
+.images {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.columns-tasks {
+  margin: 20px;
+}
+
+div.muda-desgraca {
+  display: flex;
+  flex-direction: row;
+}
+
