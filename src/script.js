@@ -30,9 +30,113 @@ class App {
     this.$doing = document.querySelector('#doing ul');
     this.$completed = document.querySelector('#completed ul');
     this.cards = [];
+    this.loadCards(); // Carregar os cards que foram armazenados no localStorage
   }
 
+  // Função que carrega os cards armazenados no localStorage
+  loadCards() {
+    const carregaCards = JSON.parse(localStorage.getItem('cards'));
+    if (carregaCards) {
+      this.cards = carregaCards;
+      this.render();
+    }
+  }
+
+  // Função que Salva os cards no localStorage
+  salvarCards() {
+    localStorage.setItem('cards', JSON.stringify(this.cards));
+  }
+
+  // Renderizar os cards
+  render() {
+    const todoCards = this.cards.filter((card) => card.section === 'todo');
+    const doingCards = this.cards.filter((card) => card.section === 'doing');
+    const completedCards = this.cards.filter((card) => card.section === 'completed');
+
+    // Renderiza os totais
+    this.renderTotal(this.$todo.closest('section').querySelector("small"), todoCards.length);
+    this.renderCards(this.$todo, todoCards);
+
+    this.renderTotal(this.$doing.closest('section').querySelector("small"), doingCards.length);
+    this.renderCards(this.$doing, doingCards);
+
+    this.renderTotal(this.$completed.closest('section').querySelector("small"), completedCards.length);
+    this.renderCards(this.$completed, completedCards);
+
+    this.salvarCards(); // Salvar cards no localStorage após renderizar
+  }
+
+  // Renderiza o total de cards
+  renderTotal(dom, total) {
+    if (dom) {
+      dom.textContent = `total ${total}`;
+    }
+  }
+
+  // Renderiza os cards em um container específico
+  renderCards(dom, cards) {
+    const html = cards
+      .map((card) => {
+        return `
+      <li>
+        <span>${card.tag}</span>
+        <p>${card.description}</p>
+        <div>
+          ${
+            card.section === "todo"
+              ? ""
+              : `<button class="move" data-id="${card.id}" data-move="left">◀️</button>`
+          }  
+          ${
+            card.section === "completed"
+              ? ""
+              : `<button class="move" data-id="${card.id}" data-move="right">▶️</button>`
+          }  
+        </div>
+        <span>${card.createdAt}</span>
+      </li>
+    `;
+      })
+      .join("");
+
+    dom.innerHTML = html;
+  }
+
+  // Adiciona um novo card
+  addCard(tag, description, section) {
+    const newCard = {
+      id: this.cards.length + 1,
+      tag,
+      description,
+      section,
+      createdAt: new Date().toLocaleString(),
+    };
+    this.cards.push(newCard);
+    this.render();
+  }
+
+  // Move um card entre as seções
+  moveCard(id, move) {
+    const card = this.cards.find((card) => card.id === id);
+    if (!card) return;
+
+    switch (card.section) {
+      case 'todo':
+        card.section = 'doing';
+        break;
+      case 'doing':
+        card.section = move === 'left' ? 'todo' : 'completed';
+        break;
+      case 'completed':
+        card.section = 'doing';
+        break;
+    }
+    this.render();
+  }
 }
+
+// Instância da classe App
+const app = new App();
 
 // Adiciona evento para o botão de nova tarefa
 const modaisAbrir = document.querySelectorAll('.add-card');
@@ -41,7 +145,6 @@ const botaoFechar = document.querySelector('.close');
 const botaoSalvar = document.getElementById('salvarTarefa');
 const inputNomeTarefa = document.getElementById('nomeTarefa');
 let listaAtual;
-
 
 function abrirModal(event) {
   modal.style.display = 'flex';
@@ -55,17 +158,13 @@ function fecharModal() {
   modal.style.display = 'none';
 }
 
+// Função para salvar uma nova tarefa
 function salvarTarefa() {
   const nomeTarefa = inputNomeTarefa.value.trim();
 
   if (nomeTarefa && listaAtual) {
-    const novaTarefa = document.createElement('li');
-    novaTarefa.textContent = nomeTarefa;
-
-    listaAtual.appendChild(novaTarefa);
-
-    const contador = listaAtual.closest('section').querySelector('small');
-    contador.textContent = `${listaAtual.children.length}`;
+    const section = listaAtual.closest('section').id; // Obtém a seção atual (todo, doing ou completed)
+    app.addCard(nomeTarefa, "Descrição da tarefa", section); // Adiciona o card ao app
 
     fecharModal();
   } else {
@@ -78,7 +177,6 @@ modaisAbrir.forEach(botao => {
 });
 
 botaoFechar.addEventListener('click', fecharModal);
-
 botaoSalvar.addEventListener('click', salvarTarefa);
 
 window.addEventListener('click', function (event) {
@@ -87,6 +185,7 @@ window.addEventListener('click', function (event) {
   }
 });
 
+// Mover card
 function onMove(event) {
   const button = event.target.closest('button');
   if (!button) {
@@ -95,79 +194,10 @@ function onMove(event) {
 
   const id = +button.dataset.id;
   const move = button.dataset.move;
-  const card = this.cards.find((card) => card.id === id);
-
-  switch (card.section) {
-    case 'todo':
-      card.section = 'doing';
-      break;
-    case 'doing':
-      if (move === 'left') {
-        card.section = 'todo';
-      } else {
-        card.section = 'completed';
-      }
-      break;
-    case 'completed':
-      card.section = 'doing';
-      break  
-  }
-this.render();
+  app.moveCard(id, move);
 }
 
-function render() {
-  const todoCards = this.cards.filter((card) => card.section === 'todo');
-  const doingCards = this.cards.filter((card) => card.section === 'doing');
-  const completedCards = this.cards.filter((card) => card.section === 'completed');
-
-  this.renderTotal(this.$todo.querySelector("small"), todoCards.length);
-  this.renderCards(this.$todo.querySelector("ul"), todoCards);
-
-  this.renderTotal(this.$doing.querySelector("small"), doingCards.length);
-  this.renderCards(this.$doing.querySelector("ul"), doingCards);
-
-  this.renderTotal(
-    this.$completed.querySelector("small"),
-    completedCards.length
-  );
-  this.renderCards(this.$completed.querySelector("ul"), completedCards);
-}
-
-function renderTotal(dom, total) {
-  dom.textContent = `total ${total}`;
-}
-
-function renderCards(dom, cards) {
-  const html = cards
-    .map((card) => {
-      return `
-    <li>
-      <span>${card.tag}</span>
-      <p>${card.description}</p>
-      <div>
-        ${
-          card.section === "todo"
-            ? ""
-            : `<button class="move" data-id="${card.id}" data-move="left">◀️</button>`
-        }  
-        ${
-          card.section === "completed"
-            ? ""
-            : `<button class="move" data-id="${card.id}" data-move="right">▶️</button>`
-        }  
-        
-      </div>
-      <span>${card.createdAt}</span>
-    </li>
-  `;
-    })
-    .join("");
-
-  dom.innerHTML = html;
-}
-
-const app = new App();
-
+document.addEventListener('click', onMove); // Adiciona evento de clique ao documento
 
 // Função para atualizar a contagem de cards em cada coluna
 function atualizarContagem() {
@@ -189,7 +219,6 @@ async function carregarUsuarios() {
       "https://gist.githubusercontent.com/MatheusQuintanilhaa/d008a9b0ce7f621ac9cfffca90900c43/raw/4f9850b5ad9917a48e3cc0939cd168c25bd4fcb1/users"
     );
 
-    // Verifique se a resposta é válida
     if (!response.ok) {
       throw new Error("Erro na rede: " + response.status);
     }
@@ -197,10 +226,8 @@ async function carregarUsuarios() {
     const usuarios = await response.json();
     const userList = document.getElementById("user-list");
 
-    // Limpa a lista de usuários antes de adicionar novos
     userList.innerHTML = "";
 
-    // Adiciona os usuários à lista
     usuarios.forEach((usuario) => {
       const img = document.createElement("img");
       img.src = usuario.foto;
@@ -220,35 +247,28 @@ async function carregarUsuarios() {
 
       userList.appendChild(userContainer);
 
-      // Adiciona evento de clique
       img.addEventListener("click", (event) => {
         const teamPhoto = document.querySelectorAll(".team-photo");
 
-        // Remove a classe "selected" de todos os usuários
         teamPhoto.forEach((photo) => {
           photo.parentNode.classList.remove("selected");
         });
 
-        // Adiciona a classe "selected" ao contêiner do usuário clicado
         event.target.parentNode.classList.add("selected");
 
-        // Atualiza o nome do usuário selecionado
         document.getElementById(
           "selected-user-name"
         ).textContent = `Usuário Selecionado: ${usuario.nome}`;
       });
     });
 
-    // Seleciona o primeiro usuário inicialmente
     if (usuarios.length > 0) {
       const firstUser = usuarios[0];
       const firstImage = document.querySelector(`img[src="${firstUser.foto}"]`);
 
       if (firstImage) {
-        // Seleciona o contêiner do primeiro usuário
         firstImage.parentNode.classList.add("selected");
 
-        // Atualiza o nome do usuário selecionado
         document.getElementById(
           "selected-user-name"
         ).textContent = `Usuário Selecionado: ${firstUser.nome}`;
@@ -264,3 +284,4 @@ window.onload = () => {
   carregarUsuarios();
   atualizarContagem();
 };
+
