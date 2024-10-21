@@ -362,11 +362,18 @@ class App {
     localStorage.setItem('cards', JSON.stringify(this.cards));
   }
 
-  // Renderizar os cards
+  // Renderizar os cards com filtro
   render() {
-    const todoCards = this.cards.filter((card) => card.section === 'todo');
-    const doingCards = this.cards.filter((card) => card.section === 'doing');
-    const completedCards = this.cards.filter((card) => card.section === 'completed');
+    // Aplica o filtro de categoria e usuário, se existirem
+    const filteredCards = this.cards.filter((card) => {
+      const matchCategoria = filtroCategoria ? card.tag === filtroCategoria : true;
+      const matchUsuario = usuarioSelecionado ? card.usuario.nome === usuarioSelecionado.nome : true;
+      return matchCategoria && matchUsuario;
+    });
+
+    const todoCards = filteredCards.filter((card) => card.section === 'todo');
+    const doingCards = filteredCards.filter((card) => card.section === 'doing');
+    const completedCards = filteredCards.filter((card) => card.section === 'completed');
 
     // Renderiza os totais
     this.renderTotal(this.$todo.closest('section').querySelector("small"), todoCards.length);
@@ -474,6 +481,15 @@ const inputNomeTarefa = document.getElementById('nomeTarefa');
 const selectCategoria = document.getElementById('categoria'); // Caixa de seleção
 let listaAtual;
 let usuarioSelecionado = null; // Armazena o usuário selecionado
+let filtroCategoria = ''; // Armazena a categoria selecionada
+
+// Adiciona eventos de clique para os filtros de categoria (Frontend, Backend, UX)
+document.querySelectorAll('#tag-filter li').forEach(filtro => {
+  filtro.addEventListener('click', function() {
+    filtroCategoria = this.getAttribute('data-tag'); // Obtém a categoria clicada
+    app.render(); // Re-renderiza os cards aplicando o filtro
+  });
+});
 
 function abrirModal(event) {
   modal.style.display = 'flex';
@@ -576,7 +592,8 @@ async function carregarUsuarios() {
       const figure = document.createElement("figure");
       figure.appendChild(img);
 
-      const userContainer = document.createElement("div");
+
+const userContainer = document.createElement("div");
       userContainer.appendChild(figure);
       userContainer.appendChild(nome);
 
@@ -623,4 +640,3 @@ window.onload = () => {
   carregarUsuarios();
   atualizarContagem();
 };
-
