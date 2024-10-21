@@ -407,4 +407,4 @@ async function carregarUsuarios() {
 window.onload = () => {
   carregarUsuarios();
   atualizarContagem();
-};
+}; 
