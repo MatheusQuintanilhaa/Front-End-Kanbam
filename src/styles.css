@@ -26,6 +26,12 @@ body {
   padding: 20px;
 }
 
+.images {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid red;
+}
+
 .filter-tag ul {
   display: flex;
   justify-content: center;
