@@ -1,103 +1,182 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanban</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="./styles.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <h1 class="title">Kanban</h1>
+    <ul id="list">
+      <li><span>Ola</span> Meu chapa</li>
+      <li>
+        <span>Oi</span><button data-id="1" data-action="delete">Deletar</button
+        ><button data-action="alterar">Alterar</button>
+      </li>
+    </ul>
     <hr />
 
     <header>
-        <div class="listasTasks">
-            <div class="images" id="user-list">
-                <!-- As imagens serão inseridas dinamicamente aqui pelo JavaScript -->
-            </div>
-
-            <div class="filter-tag">
-                <ul class="filter" id="tag-filter">
-                    <li data-tag="frontend">Front-End</li>
-                    <li data-tag="backend">Back-End</li>
-                    <li data-tag="ux">UX</li>
-                </ul>
-            </div>
+      <div class="listasTasks">
+        <div class="images" id="user-list">
+          <!-- As imagens serão inseridas dinamicamente aqui pelo JavaScript -->
         </div>
 
-        <div class="selected-user">
-            <p id="selected-user-name">Usuário Selecionado:</p>
+        <div class="filter-tag">
+          <ul class="filter" id="tag-filter">
+            <li data-tag="frontend">Front-End</li>
+            <li data-tag="backend">Back-End</li>
+            <li data-tag="ux">UX</li>
+          </ul>
         </div>
+      </div>
+
+      <div class="selected-user">
+        <p id="selected-user-name">Usuário Selecionado:</p>
+      </div>
     </header>
 
     <main>
-        <div class="muda-desgraca">
-            <section id="todo" class="columns-tasks">
-                <span class="header">
-                    <div class="kanban-title">
-                        <h2 class="red">A fazer
-                            <small id="to-do-count">0</small>
-                        </h2>
-                        <button type="submit" class="add-card"><i class="fa-solid fa-list-check"></i> Nova tarefa</button>
-                    </div>
-                    <ul class="to-do-column"></ul>
-                </span>
-            </section>
-
-            <section id="doing" class="columns-tasks">
-                <span class="header">
-                    <div class="kanban-title">
-                        <h2 class="blue">Fazendo
-                            <small id="in-progress-count">0</small>
-                        </h2>
-                        <button class="add-card"><i class="fa-solid fa-list-check"></i> Nova tarefa</button>
-                    </div>
-                    <ul class="in-progress-column"></ul>
-                </span>
-            </section>
-
-            <section id="completed" class="columns-tasks">
-                <span class="header">
-                    <div class="kanban-title">
-                        <h2 class="green">Concluído
-                            <small id="completed-count">0</small>
-                        </h2>
-                        <button class="add-card"><i class="fa-solid fa-list-check"></i> Nova tarefa</button>
-                    </div>
-                    <ul class="completed-column"></ul>
-                </span>
-            </section>
-
-            <!-- Modal de Adicionar Tarefa -->
-            <div id="modal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h2>Adicionar Nova Tarefa</h2>
-
-                    <!-- Caixa de Seleção -->
-                    <label for="categoria">Selecione a Categoria:</label>
-                    <select id="categoria">
-                        <option value="frontend">Frontend</option>
-                        <option value="backend">Backend</option>
-                        <option value="ux">UX</option>
-                    </select>
-
-                    <!-- Campo para nome da tarefa -->
-                    <label for="nomeTarefa">Nome da Tarefa</label>
-                    <input type="text" id="nomeTarefa" placeholder="Digite o nome da tarefa">
-
-                    <button id="salvarTarefa">Salvar Tarefa</button>
-                </div>
+      <div class="muda-desgraca">
+        <section id="todo" class="columns-tasks">
+          <span class="header">
+            <div class="kanban-title">
+              <h2 class="red">
+                A fazer
+                <small id="to-do-count">0</small>
+              </h2>
+              <button type="submit" class="add-card">
+                <i class="fa-solid fa-list-check"></i> Nova tarefa
+              </button>
             </div>
+            <ul class="to-do-column"></ul>
+          </span>
+        </section>
+
+        <section id="doing" class="columns-tasks">
+          <span class="header">
+            <div class="kanban-title">
+              <h2 class="blue">
+                Fazendo
+                <small id="in-progress-count">0</small>
+              </h2>
+              <button class="add-card">
+                <i class="fa-solid fa-list-check"></i> Nova tarefa
+              </button>
+            </div>
+            <ul class="in-progress-column"></ul>
+          </span>
+        </section>
+
+        <section id="completed" class="columns-tasks">
+          <span class="header">
+            <div class="kanban-title">
+              <h2 class="green">
+                Concluído
+                <small id="completed-count">0</small>
+              </h2>
+              <button class="add-card">
+                <i class="fa-solid fa-list-check"></i> Nova tarefa
+              </button>
+            </div>
+            <ul class="completed-column"></ul>
+          </span>
+        </section>
+
+        <!-- Modal de Adicionar Tarefa -->
+        <div id="modal-insert" class="modal">
+          <div class="modal-content">
+            <form id="form-insert">
+              <span class="close">&times;</span>
+              <h2>Insert</h2>
+
+              <!-- Caixa de Seleção -->
+              <label for="categoria-insert">Selecione a Categoria:</label>
+              <select id="categoria-insert" name="categoria">
+                <option value="frontend">Frontend</option>
+                <option value="backend">Backend</option>
+                <option value="ux">UX</option>
+              </select>
+
+              <!-- Campo para nome da tarefa -->
+              <label for="nomeTarefa-insert">Nome da Tarefa</label>
+              <input
+                type="text"
+                name="nomeTarefa"
+                id="nomeTarefa-insert"
+                placeholder="Digite o nome da tarefa"
+              />
+
+              <button type="submit">Salvar Tarefa</button>
+            </form>
+          </div>
         </div>
+
+        <div id="modal-update" class="modal">
+          <div class="modal-content">
+            <form id="form-update">
+              <span class="close">&times;</span>
+              <h2>Update</h2>
+
+              <!-- Caixa de Seleção -->
+              <label>Selecione a Categoria:</label>
+              <select name="categoria">
+                <option value="frontend">Frontend</option>
+                <option value="backend">Backend</option>
+                <option value="ux">UX</option>
+              </select>
+
+              <!-- Campo para nome da tarefa -->
+              <label for="nomeTarefa-insert">Nome da Tarefa</label>
+              <input
+                type="text"
+                name="nomeTarefa"
+                id="nomeTarefa-insert"
+                placeholder="Digite o nome da tarefa"
+              />
+
+              <button type="submit">Salvar Tarefa</button>
+            </form>
+          </div>
+        </div>
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <form id="form-modal">
+              <span class="close">&times;</span>
+              <h2>Adicionar Nova Tarefa</h2>
+
+              <!-- Caixa de Seleção -->
+              <label for="categoria">Selecione a Categoria:</label>
+              <select id="categoria">
+                <option value="frontend">Frontend</option>
+                <option value="backend">Backend</option>
+                <option value="ux">UX</option>
+              </select>
+
+              <!-- Campo para nome da tarefa -->
+              <label for="nomeTarefa">Nome da Tarefa</label>
+              <input
+                type="text"
+                id="nomeTarefa"
+                placeholder="Digite o nome da tarefa"
+              />
+
+              <button id="salvarTarefa">Salvar Tarefa</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

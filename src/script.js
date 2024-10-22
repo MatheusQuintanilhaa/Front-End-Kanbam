@@ -3,8 +3,19 @@ class App {
     this.$todo = document.querySelector("#todo ul");
     this.$doing = document.querySelector("#doing ul");
     this.$completed = document.querySelector("#completed ul");
+    this.$list = document.querySelector("#list");
     this.cards = [];
     this.loadCards(); // Carregar os cards que foram armazenados no localStorage
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    this.$list.addEventListener("click", (event) => {
+      console.log(event.target);
+      console.log(event.target.tagName);
+      console.log(event.target.dataset.id);
+      console.log(event.target.dataset.action);
+    });
   }
 
   // Função que carrega os cards armazenados no localStorage
@@ -71,6 +82,8 @@ class App {
 
   // Renderiza os cards em um container específico
   renderCards(dom, cards) {
+    console.log(cards);
+
     const html = cards
       .map((card) => {
         const usuario = card.usuario || {
@@ -86,6 +99,7 @@ class App {
         }" class="card-user-photo"/>
             </figure>
             <span>${card.tag}</span> <!-- Exibe a tag no card -->
+            <p>${card.id}</p>
             <p>${card.description}</p>
             <div>
               ${
@@ -135,40 +149,22 @@ class App {
       }
 
       // Atualiza o card apenas se a descrição não estiver vazia
-      this.updateCard(id, newDescription);
+      this.updateCard(id, newDescription); // Chama a função de atualização com o id correto
       fecharModal();
     };
   }
 
-  // Atualiza um card existente
   updateCard(id, newDescription) {
     const card = this.cards.find((card) => card.id === id);
     if (!card) return;
 
     card.description = newDescription; // Usar a nova descrição passada
     card.tag = selectCategoria.value; // Atualiza a tag do card
-    this.render();
+    this.render(); // Renderiza os cards novamente
   }
+
   deleteCard(id) {
     this.cards = this.cards.filter((card) => card.id !== id); // Remove o card pelo ID
-    this.render();
-  }
-
-  updateCard(id) {
-    const card = this.cards.find((card) => card.id === id);
-    if (!card) return;
-
-    const newDescription = inputNomeTarefa.value.trim();
-    const newTag = selectCategoria.value; // Atualiza a tag do card
-
-    // Verifica se a descrição não está vazia
-    if (newDescription === "") {
-      alert("Por favor, insira o nome da tarefa.");
-      return; // Interrompe a atualização se a descrição estiver vazia
-    }
-
-    card.description = newDescription; // Atualiza a descrição do card
-    card.tag = newTag; // Atualiza a tag do card
     this.render();
   }
 
@@ -179,13 +175,26 @@ class App {
       return;
     }
 
+    // Verifica se já existe um card com a mesma descrição e tag
+    const cardExists = this.cards.some(
+      (card) =>
+        card.description === description &&
+        card.tag === tag &&
+        card.section === section
+    );
+
+    if (cardExists) {
+      alert("Este card já existe.");
+      return;
+    }
+
     const newCard = {
       id: this.cards.length + 1,
       tag,
       description,
       section,
       createdAt: new Date().toLocaleString(),
-      usuario: usuarioSelecionado, // Adiciona o usuário selecionado
+      usuario: usuarioSelecionado,
     };
 
     this.cards.push(newCard);
@@ -212,7 +221,6 @@ class App {
   }
 }
 
-// Inicialize essas variáveis antes do uso no código
 let filtroCategoria = ""; // Armazena a categoria selecionada
 let usuarioSelecionado = null; // Armazena o usuário selecionado
 
@@ -221,11 +229,52 @@ const app = new App();
 
 // Adiciona evento para o botão de nova tarefa
 const modaisAbrir = document.querySelectorAll(".add-card");
-const modal = document.getElementById("modal");
+// const modal = document.getElementById("modal");
 const botaoFechar = document.querySelector(".close");
 const botaoSalvar = document.getElementById("salvarTarefa");
 const inputNomeTarefa = document.getElementById("nomeTarefa");
 const selectCategoria = document.getElementById("categoria"); // Caixa de seleção
+const formInsert = document.querySelector("#form-insert");
+const modalInsert = document.querySelector("#modal-insert");
+const formUpdate = document.querySelector("#form-update");
+const modalUpdate = document.querySelector("#modal-update");
+
+formInsert.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(formInsert);
+  const values = Object.fromEntries(formData);
+  // tag, description, section
+  app.addCard(values.categoria, values.nomeTarefa, "todo");
+  app.render();
+  formInsert.reset();
+  fecharModalInsert();
+  console.log(values);
+});
+
+formUpdate.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(formUpdate);
+  const values = Object.fromEntries(formData);
+  // tag, description, section
+
+  console.log(values);
+});
+
+const abrirModalInsert = () => {
+  modalInsert.style.display = "flex";
+};
+
+const fecharModalInsert = () => {
+  modalInsert.style.display = "none";
+};
+const abrirModalUpdate = () => {
+  modalUpdate.style.display = "flex";
+};
+
+const fecharModalUpdate = () => {
+  modalUpdate.style.display = "none";
+};
+
 let listaAtual;
 
 // Adiciona eventos de clique para os filtros de categoria (Frontend, Backend, UX)
@@ -236,13 +285,13 @@ document.querySelectorAll("#tag-filter li").forEach((filtro) => {
   });
 });
 
-function abrirModal(event) {
-  modal.style.display = "flex";
-  inputNomeTarefa.value = "";
+// function abrirModal(event) {
+//   modal.style.display = "flex";
+//   inputNomeTarefa.value = "";
 
-  const section = event.target.closest("section");
-  listaAtual = section.querySelector("ul");
-}
+//   const section = event.target.closest("section");
+//   listaAtual = section.querySelector("ul");
+// }
 
 function fecharModal() {
   modal.style.display = "none";
@@ -269,7 +318,7 @@ function salvarTarefa() {
 }
 
 modaisAbrir.forEach((botao) => {
-  botao.addEventListener("click", abrirModal);
+  botao.addEventListener("click", abrirModalInsert);
 });
 
 botaoFechar.addEventListener("click", fecharModal);
