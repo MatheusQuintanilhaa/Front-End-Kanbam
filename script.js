@@ -124,7 +124,7 @@ class App {
     });
 
     this.$responsibles.addEventListener("click", (event) => {
-      if (event.target.tagName === "LI") {
+      if (event.target.tagName === "IMG") {
         const responsible = event.target.dataset.responsible;
         this.filters.responsible =
           responsible === this.filters.responsible ? null : responsible;
@@ -217,8 +217,10 @@ class App {
   renderResponsibles() {
     const html = Object.entries(this.responsibles)
       .map(([key, value]) => {
-        const className = this.filters.responsible === key ? "active" : "";
-        return `<li data-responsible="${key}" class="${className}">${value.nome}</li>`;
+        return `
+          <li>
+            <img data-responsible="${key}" src="${value.foto}" alt="${value.nome}" width="42" height="42" />
+          </li>`;
       })
       .join("");
     this.$responsibles.innerHTML = html;
