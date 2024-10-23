@@ -102,6 +102,8 @@ Este trabaho faz parte do Módulo 4 do programa Santander Coders 2024 e envolve 
 ## 🚀 Projeto Finalizado
 <img src=".\src\img\kanbam finalizado.png"alt="Projeto Finalizado" width="600">git
 
+## 🔗 https://marcelylobato.github.io/Front-End-JS-DOM/
+
 
 ## 👥 Equipe de Desenvolvimento
 Este projeto foi desenvolvido por:
