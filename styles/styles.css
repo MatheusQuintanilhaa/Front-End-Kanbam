@@ -21,6 +21,7 @@ body {
 .add {
   display: flex;
   flex-direction: column;
+  gap: 5px;
   align-items: center;
   padding: 24px 0 0;
 }
@@ -102,6 +103,7 @@ button:hover {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   gap: 10px;
   align-items: center;
 }
@@ -147,4 +149,27 @@ button:hover {
 
 #removeFilters:hover {
   background-color: #d43f3f;
+}
+
+#tags {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#responsibles {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+h3 {
+  display: flex;
+  justify-content: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
