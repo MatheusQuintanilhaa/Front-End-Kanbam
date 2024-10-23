@@ -100,8 +100,7 @@ Este trabaho faz parte do Módulo 4 do programa Santander Coders 2024 e envolve 
 ┗📜.gitignore
 
 ## 🚀 Projeto Finalizado
-
-xxxxxxxxx
+<img src=".\src\img\Projeto finalizado.jpeg" alt="modelo do projeto" width="600">
 
 
 ## 👥 Equipe de Desenvolvimento
