@@ -1,11 +1,12 @@
-const getCurrentDate = () => new Date().toLocaleString("pt-BR", {
-  day: "2-digit",
-  month: "2-digit",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-});
+const getCurrentDate = () =>
+  new Date().toLocaleString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
 
 class App {
   constructor() {
@@ -20,36 +21,20 @@ class App {
       responsible: null,
     };
     this.responsibles = {};
-    this.cards = [
-      {
-        id: 1,
-        section: "todo",
-        tag: "frontend",
-        description: "Criar componente modal",
-        createdAt: getCurrentDate(),
-        responsible: 2,
-      },
-      {
-        id: 2,
-        section: "completed",
-        tag: "backend",
-        description: "Criar API de produtos",
-        createdAt: getCurrentDate(),
-        responsible: 1,
-      },
-      {
-        id: 3,
-        section: "doing",
-        tag: "ux",
-        description: "Fazer mocks das telas de login",
-        createdAt: getCurrentDate(),
-        responsible: 3,
-      },
-    ];
-    this.currentEditId = null; // Variável para armazenar a ID do card em edição
+    this.cards = this.loadCards();
+    this.currentEditId = null;
     this.carregarUsuarios();
     this.eventListener();
     this.render();
+  }
+
+  loadCards() {
+    const storedCards = localStorage.getItem("cards");
+    return storedCards ? JSON.parse(storedCards) : [];
+  }
+
+  saveCards() {
+    localStorage.setItem("cards", JSON.stringify(this.cards));
   }
 
   async carregarUsuarios() {
@@ -82,19 +67,19 @@ class App {
         return;
       }
 
-      const cardIndex = this.cards.findIndex((card) => card.id === this.currentEditId);
-      
+      const cardIndex = this.cards.findIndex(
+        (card) => card.id === this.currentEditId
+      );
+
       if (cardIndex >= 0) {
-        // Atualiza o card existente
         this.cards[cardIndex] = {
           ...this.cards[cardIndex],
           tag: values.tag,
           description: values.description,
           responsible: parseInt(values.responsible),
         };
-        this.currentEditId = null; // Limpa a ID do card em edição
+        this.currentEditId = null;
       } else {
-        // Cria um novo card
         const card = {
           id: Date.now(),
           section: "todo",
@@ -108,6 +93,7 @@ class App {
       }
 
       this.$form.reset();
+      this.saveCards();
       this.render();
     });
 
@@ -146,7 +132,6 @@ class App {
       }
     });
 
-    // Adiciona o evento para remover todos os filtros
     document.querySelector("#removeFilters").addEventListener("click", () => {
       this.filters = {
         tag: null,
@@ -179,6 +164,7 @@ class App {
         card.section = "doing";
         break;
     }
+    this.saveCards();
     this.render();
   }
 
@@ -189,6 +175,7 @@ class App {
     }
     const id = +button.dataset.id;
     this.cards = this.cards.filter((card) => card.id !== id);
+    this.saveCards();
     this.render();
   }
 
@@ -201,10 +188,12 @@ class App {
     const card = this.cards.find((card) => card.id === id);
 
     if (card) {
-      this.currentEditId = card.id; // Armazena a ID do card em edição
+      this.currentEditId = card.id;
       this.$form.querySelector('select[name="tag"]').value = card.tag;
-      this.$form.querySelector('textarea[name="description"]').value = card.description;
-      this.$form.querySelector('select[name="responsible"]').value = card.responsible;
+      this.$form.querySelector('textarea[name="description"]').value =
+        card.description;
+      this.$form.querySelector('select[name="responsible"]').value =
+        card.responsible;
     }
   }
 
@@ -281,9 +270,15 @@ class App {
   }
 
   updateCounts() {
-    const toDoCount = this.cards.filter((card) => card.section === "todo").length;
-    const doingCount = this.cards.filter((card) => card.section === "doing").length;
-    const completedCount = this.cards.filter((card) => card.section === "completed").length;
+    const toDoCount = this.cards.filter(
+      (card) => card.section === "todo"
+    ).length;
+    const doingCount = this.cards.filter(
+      (card) => card.section === "doing"
+    ).length;
+    const completedCount = this.cards.filter(
+      (card) => card.section === "completed"
+    ).length;
 
     document.querySelector("#todoCount").textContent = toDoCount;
     document.querySelector("#doingCount").textContent = doingCount;
