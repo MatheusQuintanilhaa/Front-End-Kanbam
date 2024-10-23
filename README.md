@@ -100,7 +100,7 @@ Este trabaho faz parte do Módulo 4 do programa Santander Coders 2024 e envolve 
 ┗📜.gitignore
 
 ## 🚀 Projeto Finalizado
-<img src=".\src\img\Projeto finalizado.jpeg" alt="modelo do projeto" width="600">
+<img src=".\src\img\kanbam finalizado.png"alt="Projeto Finalizado" width="600">git
 
 
 ## 👥 Equipe de Desenvolvimento
@@ -121,6 +121,6 @@ Orientado pelo professor **[Palmer Oliveira](https://github.com/expalmer)** como
 - [API de Armazenamento na Web](https://developer.mozilla.org/pt-BR/docs/Web/API/Web_Storage_API)
 - [Manipulando o DOM](http://devfuria.com.br/javascript/dom-manipulando-o-dom/)
 
----
+- [Gist](https://gist.github.com/)
 
 Esse README fornece uma descrição clara do projeto, suas funcionalidades e como ele pode ser executado, além de incluir os critérios de avaliação.
