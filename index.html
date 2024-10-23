@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <form id="form">
+        <input type="color">
+        <input type="date">
+        <div class="add">
+            <select name="tag">
+                <option value="">-</option>
+                <option value="Frontend">frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="Ux">Ux</option>
+            </select>
+            <textarea name="description"></textarea>
+            <select name="responsible">
+                <option value="">Escolha um responsável</option>
+                <option value="1">Marcely Lobato</option>
+                <option value="2">Karolyne Rafaelly De Sousa Carvalho</option>
+                <option value="3">Francisco Cezaniltom Soares Silva</option>
+                <option value="4">Matheus Santos Quintanilha</option>
+            </select>
+            <button type="submit"> 📝Add Task</button>
+        </div>
+    </form>
+    
+    <div class="filters">
+        <h3>Filter by tag:</h3>
+        <ul id="tags">
+            <li data-tag="Frontend">Frontend</li>
+            <li data-tag="Backend">Backend</li>
+            <li data-tag="Ux">Ux</li>
+        </ul>
+        <h3>Filter by responsible:</h3>
+        <ul id="responsibles">
+            <li data-responsible="1">Marcely Lobato</li>
+            <li data-responsible="2">Karolyne Rafaelly De Sousa Carvalho</li>
+            <li data-responsible="3">Francisco Cezaniltom Soares Silva</li>
+            <li data-responsible="4">Matheus Santos Quintanilha</li>
+        </ul>
+        <button id="removeFilters">🗑 Remover Filtros</button>
+    </div>
+
+    <div class="container">
+        <section id="todo">
+            <h2>
+                TODO
+                <small>total <span id="todoCount">0</span></small>
+            </h2>
+            <ul></ul>
+        </section>
+        <section id="doing">
+            <h2>
+                DOING
+                <small>total <span id="doingCount">0</span></small>
+            </h2>
+            <ul></ul>
+        </section>
+        <section id="completed">
+            <h2>
+                COMPLETED
+                <small>total <span id="completedCount">0</span></small>
+            </h2>
+            <ul></ul>
+        </section>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
