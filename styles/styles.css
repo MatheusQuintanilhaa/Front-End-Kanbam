@@ -3,19 +3,28 @@ body {
   background: linear-gradient(90deg, #282828, #282828);
   margin: 0;
   padding: 20px;
-}
+
+
 .container {
   margin: auto;
-  max-width: 960px;
+  /*max-width: 1000px;*/
   display: flex;
   justify-content: space-between;
   gap: 40px;
   padding: 40px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
+#form {
+  flex-grow: 1; 
+  padding: 10px; 
+  font-size: 16px; 
+   border: 5px solid #297E7E; 
+  border-radius: 4px; 
+  margin: 0 10px; 
+}
+  
 
 .add {
   display: flex;
@@ -23,12 +32,29 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  border: solid 1px #297E7E;
   width: 100%;
-  height: 100%;
+  flex-wrap: wrap; 
 }
+
+#form select, #form textarea, #form button {
+  padding: 10px;
+  font-size: 16px;
+  flex-grow: 1; 
+  padding: 10px; 
+  font-size: 16px; 
+  border: none;
+  border-radius: 4px; 
+  margin: 0 10px; 
+}
+
+#form textarea {
+  resize: vertical;
+  height: 50px;
+  
+}
+
 section {
-  border: solid 1px #ccc;
+  border: solid 2px #ccc;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -43,22 +69,21 @@ h2 {
   display: flex;
   justify-content: space-between;
   font-size: 20px;
-  width: 100%
-}
-#todo{
-  color:#18eba4;
-
+  width: 100%;
 }
 
-#doing{
-  color:  #f06814;
+#todo {
+  color: #18eba4;
 }
 
-#completed{
- 
+#doing {
+  color: #f06814;
+}
+
+#completed {
   color: #007bff;
-
 }
+
 ul {
   padding: 0;
   margin: 0;
@@ -69,7 +94,7 @@ ul {
   width: 100%;
 }
 
- ul li {
+ul li {
   position: relative;
   padding: 10px;
   display: flex;
@@ -83,7 +108,7 @@ ul {
 }
 
 ul li:hover {
-  background-color:#edf0f3;
+  background-color: #edf0f3;
 }
 
 ul li img {
@@ -98,8 +123,9 @@ ul li div {
   gap: 8px;
 }
 
+/* Botões no card e form */
 button {
-  background-color: #61CCA5;
+  background-color: #297E7E;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -109,28 +135,28 @@ button {
 }
 
 button:hover {
-  background-color: #297E7E;
+  background-color: #61CCA5;
 }
 
-
-  #responsibles{
-   margin-top: 20px;
+#responsibles {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
-  width:30%;
-  height:30%;
+  gap: 10px;
+}
 
-  }
-
-  #tags{
-
+#tags {
   border: solid 1px #297E7E;
   display: flex;
-  display: flex; 
-  flex-direction:row-reverse; 
+  flex-direction: row-reverse;
   margin-top: -50px;
-  gap: 20px; 
-  height:50%;
+  gap: 20px;
+  height: 0px;
+}
+
+#tags li {
+  padding: 9px 25px; /* Ajuste o padding para reduzir a altura */
+  height: 35px; /* Defina uma altura específica se necessário */
 }
 
 
@@ -145,7 +171,7 @@ button:hover {
 .filters ul li {
   padding: 10px 20px;
   background-color: #297E7E;
-  color: #282828;
+  color: #000;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -153,15 +179,15 @@ button:hover {
 
 .filters ul li.active {
   background-color: #fff;
- 
-}
-filters ul li:hover {
-  background-color: ##61CCA5;
 }
 
-#removeFilters .center {
-  display: flex;
+.filters ul li:hover {
+  background-color: #fff;
+}
+
+#removeFilters {
   background-color: #8d1818;
+  justify-content: center;
   padding: 8px 12px;
   border-radius: 4px;
   color: #fff;
@@ -173,21 +199,53 @@ filters ul li:hover {
   background-color: #d43f3f;
 }
 
-#tags, #responsibles {
-  display: flex; 
-  flex-direction: row; 
-  height: 100%;
-}
-
-
-.center {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  margin: 10px auto;
-}
-
 .hidden {
   display: none;
 }
 
+
+
+
+
+.filters {
+  display: flex;
+  justify-content: space-between; 
+  align-items:center;
+  margin-bottom: 20px;
+  gap: 5px;
+
+}
+
+.filters .left,
+.filters .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filters .center {
+  display: flex;
+  justify-content: center;
+}
+
+.filters .left {
+  justify-content: flex-start;
+}
+
+.filters .right {
+  justify-content: flex-end;
+}
+
+#responsibles li {
+  padding: 5px 10px; 
+  font-size: 16px;
+  background-color: #297E7E;
+  color: #f1f1f1;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#responsibles li:hover {
+  background-color: #61CCA5;
+}
