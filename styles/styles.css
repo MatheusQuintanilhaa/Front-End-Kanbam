@@ -1,13 +1,13 @@
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(90deg, #282828, #282828);
+  background: linear-gradient(90deg, #081919, #627e7e);
   margin: 0;
   padding: 20px;
 
 
 .container {
   margin: auto;
-  /*max-width: 1000px;*/
+  /*max-width: 950px;*/
   display: flex;
   justify-content: space-between;
   gap: 40px;
@@ -41,7 +41,6 @@ body {
   font-size: 16px;
   flex-grow: 1; 
   padding: 10px; 
-  font-size: 16px; 
   border: none;
   border-radius: 4px; 
   margin: 0 10px; 
@@ -108,25 +107,24 @@ ul li {
 }
 
 ul li:hover {
-  background-color: #edf0f3;
+  background-color: #f1f1f1;
 }
 
 ul li img {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
 }
 
 ul li div {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap:20px;
 }
-
-/* Botões no card e form */
+ 
 button {
   background-color: #297E7E;
-  color: #fff;
+  color: #f1f1f1;
   border: none;
   border-radius: 4px;
   padding: 8px 12px;
@@ -146,17 +144,16 @@ button:hover {
 }
 
 #tags {
-  border: solid 1px #297E7E;
   display: flex;
   flex-direction: row-reverse;
   margin-top: -50px;
   gap: 20px;
-  height: 0px;
+  height: 5px;
 }
 
 #tags li {
-  padding: 9px 25px; /* Ajuste o padding para reduzir a altura */
-  height: 35px; /* Defina uma altura específica se necessário */
+  padding: 9px 25px; 
+  height: 50px; 
 }
 
 
@@ -171,40 +168,37 @@ button:hover {
 .filters ul li {
   padding: 10px 20px;
   background-color: #297E7E;
-  color: #000;
+  color: #f1f1f1;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .filters ul li.active {
-  background-color: #fff;
+  background-color: #f1f1f1;
 }
 
 .filters ul li:hover {
-  background-color: #fff;
+  background-color: #61CCA5;
 }
 
 #removeFilters {
-  background-color: #8d1818;
+  background-color: #7e2929;
   justify-content: center;
   padding: 8px 12px;
   border-radius: 4px;
-  color: #fff;
+  color: #f1f1f1;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 #removeFilters:hover {
-  background-color: #d43f3f;
+  background-color: #61CCA5;
 }
 
 .hidden {
   display: none;
 }
-
-
-
 
 
 .filters {
